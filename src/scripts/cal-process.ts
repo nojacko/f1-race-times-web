@@ -104,24 +104,26 @@ async function run(): Promise<void> {
           coords,
         };
 
-        sessions.push(session);
-      }
-
-      // validate: every attribute on each session must be a non-empty string
-      const invalidSessions = sessions.filter((s) => {
-        for (const k of Object.keys(s)) {
-          const v = (s as any)[k];
+        let isBad = false;
+         for (const k of Object.keys(session)) {
+          const v = (session as any)[k];
           if (k === "coords") {
-            if (isNaN(v.lat) || isNaN(v.lon) || !Number.isFinite(v.lat) || !Number.isFinite(v.lon)) return true;
+            if (isNaN(v.lat) || isNaN(v.lon) || !Number.isFinite(v.lat) || !Number.isFinite(v.lon)) {
+              isBad = true;
+            }
           } else {
-            if (typeof v !== "string" || v.length === 0) return true;
+            if (typeof v !== "string" || v.length === 0) {
+              isBad = true;
+            }
           }
         }
-        return false;
-      });
-      if (invalidSessions.length > 0) {
-        for (const bad of invalidSessions) {
-          console.error("Invalid session (missing/empty string attribute):", bad);
+
+        if (isBad) {
+          console.error(`Bad ${formula.slug} session`);
+          console.log("Props:", props);
+          console.log("Session", session);
+        } else {
+          sessions.push(session);
         }
       }
 
