@@ -9,8 +9,8 @@
     "dev": "ts-node src/main.ts",
     "format": "prettier --write \"**/*.{ts,js}\"",
     "lint": "eslint \"**/*.ts\" --fix",
-    "download-calendars": "ts-node src/scripts/download-calendars.ts",
-    "process-calendars": "ts-node src/scripts/process-calendars.ts"
+    "cal:download": "ts-node src/scripts/cal-download.ts",
+    "cal:parse": "ts-node src/scripts/cal-parse.ts"
   },
   "author": "",
   "license": "ISC",

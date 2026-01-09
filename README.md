@@ -17,7 +17,8 @@ rm -rf ./public-expo
 cp -r ../f1-race-times-app/dist ./public-expo
 
 # Update Data
-npm run download-calendars
+npm run cal:download
+npm run cal:parse
 
 # Development mode
 npm run dev
