@@ -7,7 +7,7 @@ export const calendars: Calendar[] = [
   {
     name: "F1",
     url: "https://files-f1.motorsportcalendars.com/f1-calendar_p1_p2_p3_qualifying_sprint_gp.ics",
-    file: path.join(VARS.DIR_TEMP, "calendar", "f1-calendar.ics"),
+    file: path.join(VARS.DIR_DATA, "f1-calendar.ics"),
     raceSessionsFile: path.join(VARS.DIR_DATA, "f1-sessions.ts"),
     calendarEventsFile: path.join(VARS.DIR_DATA, "f1-calendar-events.ts"),
     formula: F1.slug,
@@ -15,7 +15,7 @@ export const calendars: Calendar[] = [
   {
     name: "F2",
     url: "https://files-f2.motorsportcalendars.com/f2-calendar_p_q_sprint_feature.ics",
-    file: path.join(VARS.DIR_TEMP, "calendar", "f2-calendar.ics"),
+    file: path.join(VARS.DIR_DATA, "f2-calendar.ics"),
     raceSessionsFile: path.join(VARS.DIR_DATA, "f2-sessions.ts"),
     calendarEventsFile: path.join(VARS.DIR_DATA, "f2-calendar-events.ts"),
     formula: F2.slug,
