@@ -1,59 +1,76 @@
 import * as fs from "fs";
+import * as path from "path";
 import { VARS } from "../vars";
 
-async function shouldDownload(): Promise<boolean> {
-  if (!fs.existsSync(VARS.FILE_CALENDAR_F1)) {
-    console.log("Calendar file does not exist. Downloading...");
+type Calendar = {
+  name: string;
+  url: string;
+  file: string;
+};
+
+function msToMinutes(ms: number): number {
+  return Math.round(ms / 1000 / 60);
+}
+async function shouldDownload(cal: Calendar, cacheMs: number): Promise<boolean> {
+    console.log(cal.file);
+  if (!fs.existsSync(cal.file)) {
+    console.log(`- ${cal.name}: Cache does not exist. Downloading...`);
     return true;
   }
 
-  const stats = fs.statSync(VARS.FILE_CALENDAR_F1);
+  const stats = fs.statSync(cal.file);
   const fileAgeMs = Date.now() - stats.mtimeMs;
 
-  if (fileAgeMs > VARS.MS_HOUR) {
-    console.log(`Calendar file is ${Math.round(fileAgeMs / 1000 / 60)} minutes old. Downloading...`);
+  if (fileAgeMs > cacheMs) {
+    console.log(`- ${cal.name}: Cache is ${msToMinutes(fileAgeMs)}m old. Downloading...`);
     return true;
   }
 
-  console.log(`Calendar file is fresh (${Math.round(fileAgeMs / 1000 / 60)} minutes old). Skipping download.`);
+  console.log(`- ${cal.name}: Cache is fresh (${msToMinutes(fileAgeMs)}m old). Skipping.`);
   return false;
 }
 
-async function ensureCalendarDir(): Promise<void> {
-  if (!fs.existsSync(VARS.DIR_TEMP_CALENDAR)) {
-    fs.mkdirSync(VARS.DIR_TEMP_CALENDAR, { recursive: true });
-    console.log(`Created directory: ${VARS.DIR_TEMP_CALENDAR}`);
+async function ensureDir(cal: Calendar): Promise<void> {
+  const dirPath = path.dirname(cal.file);
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
   }
 }
 
-async function downloadCalendar(): Promise<void> {
+async function downloadCalendar(cal: Calendar): Promise<void> {
   try {
-    console.log(`Fetching calendar from: ${VARS.URL_CALENDAR_F1}`);
-    const response = await fetch(VARS.URL_CALENDAR_F1);
+    console.log(`- ${cal.name}: Fetching calendar from: ${cal.url}`);
+    const response = await fetch(cal.url);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch calendar: ${response.status} ${response.statusText}`);
     }
 
     const buffer = await response.arrayBuffer();
-    fs.writeFileSync(VARS.FILE_CALENDAR_F1, Buffer.from(buffer));
-    console.log(`Calendar saved to: ${VARS.FILE_CALENDAR_F1}`);
+    fs.writeFileSync(cal.file, Buffer.from(buffer));
+    console.log(`- ${cal.name}: Saved to ${cal.file}`);
   } catch (error) {
-    console.error("Error downloading calendar:", error);
+    console.error(`- ${cal.name}: Error downloading calendar:`, error);
     throw error;
   }
 }
 
 async function run(): Promise<void> {
   try {
-    await ensureCalendarDir();
-    const needsDownload = await shouldDownload();
+    const calendars: Calendar[] = [
+      { name: "F1", url: VARS.URL_CALENDAR_F1, file: VARS.FILE_CALENDAR_F1 },
+      { name: "F2", url: VARS.URL_CALENDAR_F2, file: VARS.FILE_CALENDAR_F2 },
+    ];
 
-    if (needsDownload) {
-      await downloadCalendar();
+    for (const cal of calendars) {
+      console.log(`${cal.name} calender`);
+      await ensureDir(cal);
+      const needs = await shouldDownload(cal, VARS.MS_HOUR);
+      if (needs) await downloadCalendar(cal);
+      console.log("");
     }
 
-    console.log("Calendar sync completed successfully.");
+    console.log("Completed");
   } catch (error) {
     console.error("Calendar sync failed:", error);
     process.exit(1);
