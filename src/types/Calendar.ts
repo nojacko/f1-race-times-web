@@ -2,7 +2,8 @@ export type Calendar = {
   name: string;
   url: string;
   file: string;
-  tsOutput: string;
+  raceSessionsFile: string;
+  calendarEventsFile?: string;
   formula: string;
 };
 
