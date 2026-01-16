@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { sessionsByFormula, calendarEventsByFormula, racesByFormula, calendarByFormula } from "../utils/data";
+import { getFormulaSessionTypes, calendarEventsByFormula, racesByFormula, calendarByFormula } from "../utils/data";
 import { formulas } from "../data/formulas";
 import type { CalendarEvent } from "../types/CalendarEvent";
 import type { RaceSession } from "../types/RaceSession";
@@ -49,7 +49,7 @@ async function run(): Promise<void> {
         continue;
       }
 
-      const typesForCal = sessionsByFormula(formula.slug) || [];
+      const typesForCal = getFormulaSessionTypes(formula.slug) || [];
       if (!typesForCal || typesForCal.length === 0) {
         console.error(`No session types for formula "${formula.slug}". Skipping.`);
         continue;
