@@ -5,6 +5,9 @@ export const F1: Formula = {
   name: "F1",
   trademarks: "Formula One, Formula 1, F1 & Grand Prix are trademarks of Formula One Licensing BV.",
   active: true,
+  primaryColor: "#E10600",
+  logoBgColor: "#15151e",
+  logoTextColor: "#E10600",
 };
 
 export const F2: Formula = {
@@ -12,6 +15,9 @@ export const F2: Formula = {
   name: "F2",
   trademarks: "FIA FORMULA 2 CHAMPIONSHIP, FIA FORMULA 2, FORMULA 2, F2 are trademarks of the FIA.",
   active: true,
+  primaryColor: "#023A5F",
+  logoBgColor: "#023A5F",
+  logoTextColor: "#ffffff",
 };
 
 export const F3: Formula = {
@@ -19,6 +25,9 @@ export const F3: Formula = {
   name: "F3",
   trademarks: "FIA FORMULA 3 CHAMPIONSHIP, FIA FORMULA 3, FORMULA 3, F3 are trademarks of the FIA.",
   active: false,
+  primaryColor: "#666666",
+  logoBgColor: "#666666",
+  logoTextColor: "#ffffff",
 };
 
 export const FORMULA_E: Formula = {
@@ -26,6 +35,9 @@ export const FORMULA_E: Formula = {
   name: "Formula E",
   trademarks: "Formula-E, FIA FORMULA-E CHAMPIONSHIP & E-Prix are trademarks of the FIA.",
   active: false,
+  primaryColor: "#0000ff",
+  logoBgColor: "#0000ff",
+  logoTextColor: "#ffffff",
 };
 
 export const F1_ACADEMY: Formula = {
@@ -33,6 +45,9 @@ export const F1_ACADEMY: Formula = {
   name: "F1 Academy",
   trademarks: "F1 Academy, Formula One, Formula 1, F1 & Grand Prix are trademarks of Formula One Licensing BV.",
   active: false,
+  primaryColor: "#0083d3",
+  logoBgColor: "#0083d3",
+  logoTextColor: "#ffffff",
 };
 
 export const formulas: Formula[] = [F1, F2, F3, FORMULA_E, F1_ACADEMY];

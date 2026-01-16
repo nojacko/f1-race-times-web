@@ -3,4 +3,7 @@ export interface Formula {
   name: string;
   trademarks: string;
   active: boolean;
+  primaryColor?: string;
+  logoBgColor?: string;
+  logoTextColor?: string;
 }
