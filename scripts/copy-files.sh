@@ -47,5 +47,13 @@ for tf in "${type_files[@]}"; do
 	fi
 done
 
+echo "- Copying public flags to $DIR_WEB/static"
+if [ -d "$DIR_API/public/flags" ]; then
+    mkdir -p "$DIR_WEB/static"
+    cp -r "$DIR_API/public/flags" "$DIR_WEB/static/"
+else
+    echo "🔴 Warning: $DIR_API/public/flags not found, skipping"
+fi
+
 echo
 echo "Completed"

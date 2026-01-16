@@ -12,7 +12,8 @@
     "cal:all": "run cal:download; npm run cal:parse; npm run cal:process",
     "cal:download": "ts-node src/scripts/cal-download.ts",
     "cal:parse": "ts-node src/scripts/cal-parse.ts && eslint \"src/data/**/*.ts\" --fix",
-    "cal:process": "ts-node src/scripts/cal-process.ts && eslint \"src/data/**/*.ts\" --fix"
+    "cal:process": "ts-node src/scripts/cal-process.ts && eslint \"src/data/**/*.ts\" --fix",
+    "update:races": "ts-node src/scripts/races.ts"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +31,7 @@
     "@types/node": "^25.0.3",
     "@typescript-eslint/eslint-plugin": "^8.52.0",
     "@typescript-eslint/parser": "^8.52.0",
+    "circle-flags": "github:HatScripts/circle-flags",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
