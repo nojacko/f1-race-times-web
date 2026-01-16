@@ -1,6 +1,6 @@
-# f1-race-times-web
+# race-times-api
 
-NestJS server for serving Expo web app and an API.
+NestJS server for serving Svetle web app and the API.
 
 ## Setup
 
@@ -12,7 +12,7 @@ npm run build
 ## Running
 
 ```bash
-sh copy-files.sh
+sh scripts/copy-files.sh
 npm run cal:all
 npm run dev
 ```
@@ -20,7 +20,7 @@ npm run dev
 ## Production
 
 ```bash
-sh copy-files.sh
+sh scripts/copy-files.sh
 npm run build
 npm start
 ```
@@ -48,3 +48,4 @@ npm start
 - `public-expo/` - Static assets directory for Expo-generated files
 - `public/` - Additional static assets
 - `dist/` - Compiled JavaScript output
+- `scripts/` - Helper scripts (e.g. `scripts/copy-files.sh`)
