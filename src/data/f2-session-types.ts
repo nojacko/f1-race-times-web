@@ -1,4 +1,4 @@
-import { RaceSessionType } from "../types/RaceSessionType";
+import type { RaceSessionType } from "../types/RaceSessionType";
 import { F2 } from "./formulas";
 
 const formulaSlug = F2.slug;

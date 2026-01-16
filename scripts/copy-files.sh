@@ -23,6 +23,7 @@ data_files=(
 	"f2-races.ts"
 	"f2-session-types.ts"
 	"f2-sessions.ts"
+    "formulas.ts"
 )
 
 for f in "${data_files[@]}"; do
