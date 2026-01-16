@@ -36,7 +36,7 @@ for f in "${data_files[@]}"; do
 done
 
 echo "- Copying types to $DIR_WEB/src/lib/types"
-type_files=("Race.ts" "RaceSession.ts" "RaceSessionType.ts")
+type_files=("Race.ts" "RaceSession.ts" "RaceSessionType.ts" "Formula.ts")
 
 for tf in "${type_files[@]}"; do
 	tsrc="$DIR_API/src/types/$tf"
